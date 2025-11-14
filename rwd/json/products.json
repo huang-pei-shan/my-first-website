@@ -1,12 +1,12 @@
 [
-    {"id": "P001", "name": "產品A"},
-    {"id": "P002", "name": "產品B"},
-    {"id": "P003", "name": "產品C"},
-    {"id": "P004", "name": "產品D"},
-    {"id": "P005", "name": "產品E"},
-    {"id": "P006", "name": "產品F"},
-    {"id": "P007", "name": "產品G"},
-    {"id": "P008", "name": "產品H"},
-    {"id": "P009", "name": "產品I"},
-    {"id": "P010", "name": "產品J"}
+    { "id": 1, "name": "產品A", "price": 320, "category": "電子", "color": "紅" },
+    { "id": 2, "name": "產品B", "price": 250, "category": "家電", "color": "藍" },
+    { "id": 3, "name": "產品C", "price": 780, "category": "戶外", "color": "綠" },
+    { "id": 4, "name": "產品D", "price": 120, "category": "文具", "color": "黃" },
+    { "id": 5, "name": "產品E", "price": 540, "category": "電子", "color": "黑" },
+    { "id": 6, "name": "產品F", "price": 399, "category": "家電", "color": "白" },
+    { "id": 7, "name": "產品G", "price": 210, "category": "戶外", "color": "灰" },
+    { "id": 8, "name": "產品H", "price": 899, "category": "電子", "color": "銀" },
+    { "id": 9, "name": "產品I", "price": 150, "category": "文具", "color": "紫" },
+    { "id": 10, "name": "產品J", "price": 670, "category": "家電", "color": "橘" }
 ]
