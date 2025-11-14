@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>RWD 產品比較頁面</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <h1>產品比較：上方為傳統表格，下方為 RWD 呈現</h1>
+
+    <!-- 上方傳統表格 -->
+    <div class="table-container">
+        <table id="product-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>產品名稱</th>
+                    <th>價格</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- 動態由 JS 產生 -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 下方 RWD 格子呈現 -->
+    <h2>RWD 格子呈現方式</h2>
+
+    <div class="grid-container" id="grid-container">
+        <!-- 動態由 JS 產生 -->
+    </div>
+
+    <script>
+        // 載入 JSON 資料
+        fetch("json/products.json")
+            .then(response => response.json())
+            .then(products => {
+                // ======== 上方 表格 ========
+                const tableBody = document.getElementById("table-body");
+
+                products.forEach(product => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td>${product.price}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                // ======== 下方 RWD 格子 ========
+                const gridContainer = document.getElementById("grid-container");
+
+                products.forEach(product => {
+                    const div = document.createElement("div");
+                    div.className = "product-card";
+                    div.innerHTML = `
+                        <h3>${product.name}</h3>
+                        <p>ID: ${product.id}</p>
+                        <p>價格：$${product.price}</p>
+                    `;
+                    gridContainer.appendChild(div);
+                });
+            });
+    </script>
+
+</body>
+</html>
