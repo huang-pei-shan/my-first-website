@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>產品比較網頁</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>產品比較</h1>
@@ -24,7 +24,7 @@
 
     <script>
         // 讀取 JSON 產品資料
-        fetch('JSON/products.json')
+        fetch('json/products.json')
             .then(response => response.json())
             .then(data => {
                 const tableBody = document.querySelector('#product-table tbody');
