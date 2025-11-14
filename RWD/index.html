@@ -7,41 +7,51 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>產品比較</h1>
 
-    <!-- 傳統表格顯示 -->
-    <table id="product-table">
-        <thead>
-            <tr>
-                <th>編號</th>
-                <th>名稱</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- 產品資料會在這裡顯示 -->
-        </tbody>
+    <h1>產品比較網頁</h1>
+
+    <!-- 上方傳統表格 -->
+    <h2>傳統表格呈現</h2>
+    <table class="table-products" id="product-table">
+        <tr>
+            <th>產品名稱</th>
+            <th>價格</th>
+        </tr>
     </table>
 
+    <!-- 下方 RWD 格子 -->
+    <h2>RWD 格子呈現</h2>
+    <div class="grid-container" id="product-grid"></div>
+
     <script>
-        // 讀取 JSON 產品資料
+        // 讀取 JSON 資料
         fetch('json/products.json')
             .then(response => response.json())
             .then(data => {
-                const tableBody = document.querySelector('#product-table tbody');
+                const table = document.getElementById('product-table');
+                const grid = document.getElementById('product-grid');
 
-                // 根據資料創建表格行
-                data.forEach((product, index) => {
+                // 每 5 筆產品生成一列
+                for (let i = 0; i < data.length; i += 5) {
                     const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${product.id}</td>
-                        <td>${product.name}</td>
-                    `;
-                    tableBody.appendChild(row);
+                    for (let j = i; j < i + 5 && j < data.length; j++) {
+                        const cell = document.createElement('td');
+                        cell.innerHTML = `<strong>${data[j].name}</strong><br>${data[j].price}`;
+                        row.appendChild(cell);
+                    }
+                    table.appendChild(row);
+                }
+
+                // RWD Grid
+                data.forEach(product => {
+                    const gridItem = document.createElement('div');
+                    gridItem.classList.add('grid-item');
+                    gridItem.innerHTML = `<strong>${product.name}</strong><br>${product.price}`;
+                    grid.appendChild(gridItem);
                 });
             })
-            .catch(error => {
-                console.error('讀取資料錯誤:', error);
-            });
+            .catch(err => console.error('讀取 JSON 失敗:', err));
     </script>
+
 </body>
 </html>
