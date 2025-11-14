@@ -1,0 +1,68 @@
+/* ====== 上方傳統表格 ====== */
+
+.table-container {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+table tr:nth-child(even) {
+    background-color: #f0f8ff;
+}
+
+table tr:nth-child(odd) {
+    background-color: #e8f5e9;
+}
+
+/* ====== 下方 RWD 產品格子 ====== */
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 寬螢幕：每列 5 個 */
+    gap: 10px;
+}
+
+.product-card {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+/* 交錯背景色 */
+.product-card:nth-child(odd) {
+    background-color: #fff3cd;
+}
+.product-card:nth-child(even) {
+    background-color: #d1ecf1;
+}
+
+/* ====== RWD：螢幕變窄自動縮減欄位 ====== */
+
+@media (max-width: 992px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr); /* 中等螢幕：3 欄 */
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* 小螢幕：2 欄 */
+    }
+}
+
+@media (max-width: 400px) {
+    .grid-container {
+        grid-template-columns: repeat(1, 1fr); /* 超小螢幕：1 欄 */
+    }
+}
