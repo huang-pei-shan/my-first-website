@@ -3,45 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>產品比較網頁</title>
+    <title>產品比較 RWD 練習</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>產品比較</h1>
 
-    <!-- 傳統表格顯示 -->
-    <table id="product-table">
-        <thead>
-            <tr>
-                <th>編號</th>
-                <th>名稱</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- 產品資料會在這裡顯示 -->
-        </tbody>
-    </table>
+<h1>產品比較展示</h1>
 
-    <script>
-        // 讀取 JSON 產品資料
-        fetch('json/products.json')
-            .then(response => response.json())
-            .then(data => {
-                const tableBody = document.querySelector('#product-table tbody');
+<!-- 傳統表格 -->
+<h2>上方：傳統表格 (每列 5 筆)</h2>
+<table id="product-table">
+    <thead>
+        <tr>
+            <th>產品ID</th>
+            <th>名稱</th>
+            <th>價格</th>
+            <th>分類</th>
+            <th>顏色</th>
+        </tr>
+    </thead>
+    <tbody id="table-body">
+        <!-- 動態插入 -->
+    </tbody>
+</table>
 
-                // 根據資料創建表格行
-                data.forEach((product, index) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${product.id}</td>
-                        <td>${product.name}</td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-            })
-            .catch(error => {
-                console.error('讀取資料錯誤:', error);
-            });
-    </script>
+<hr>
+
+<!-- RWD 區塊 -->
+<h2>下方：RWD 卡片呈現</h2>
+<div id="rwd-container" class="rwd-grid">
+    <!-- 動態插入 -->
+</div>
+
+<script>
+    // 讀取 JSON
+    fetch('json/products.json')
+        .then(res => res.json())
+        .then(data => {
+            generateTable(data);
+            generateRWD(data);
+        });
+
+    // 產生傳統表格內容
+    function generateTable(products) {
+        const tbody = document.getElementById('table-body');
+        let rows = '';
+        products.forEach((p, index) => {
+            rows += `
+                <tr class="color-${index % 5}">
+                    <td>${p.id}</td>
+                    <td>${p.name}</td>
+                    <td>${p.price}</td>
+                    <td>${p.category}</td>
+                    <td>${p.color}</td>
+                </tr>
+            `;
+        });
+        tbody.innerHTML = rows;
+    }
+
+    // RWD 卡片內容
+    function generateRWD(products) {
+        const container = document.getElementById('rwd-container');
+        let html = '';
+        products.forEach((p, index) => {
+            html += `
+                <div class="rwd-item color-${index % 5}">
+                    <h3>${p.name}</h3>
+                    <p><strong>ID:</strong> ${p.id}</p>
+                    <p><strong>價格:</strong> ${p.price}</p>
+                    <p><strong>分類:</strong> ${p.category}</p>
+                    <p><strong>顏色:</strong> ${p.color}</p>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+</script>
+
 </body>
 </html>
