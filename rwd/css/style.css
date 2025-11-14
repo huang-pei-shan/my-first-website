@@ -1,0 +1,73 @@
+/* 全域設定 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+/* 傳統表格樣式 */
+.table-products {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+}
+
+.table-products th,
+.table-products td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.table-products tr:nth-child(odd) td {
+    background-color: #f9f9f9;
+}
+
+.table-products tr:nth-child(even) td {
+    background-color: #e0f7fa;
+}
+
+/* RWD 格子容器 */
+.grid-container {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+/* 預設每列 5 個格子 */
+.grid-item {
+    background-color: #ffecb3;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* 使用 RWD 自動調整格子數量 */
+@media (min-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 575px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
