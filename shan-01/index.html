@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Playlist Random Player</title>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+<h1>🎵 隨機播放 YouTube 歌單</h1>
+
+<select id="playlistSelect"></select>
+<button onclick="playRandom()">隨機播放</button>
+
+<div id="player"></div>
+
+<script>
+let playlists = {};
+let player;
+
+// 讀取 playlist.json
+fetch("playlists/playlist.json")
+  .then(res => res.json())
+  .then(data => {
+    playlists = data;
+    let select = document.getElementById("playlistSelect");
+
+    Object.keys(playlists).forEach(pl => {
+      let opt = document.createElement("option");
+      opt.value = pl;
+      opt.textContent = pl;
+      select.appendChild(opt);
+    });
+  });
+
+// 建立 YouTube Player
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: "360",
+    width: "640",
+    videoId: ""
+  });
+}
+
+// 隨機播放
+function playRandom() {
+  let listName = document.getElementById("playlistSelect").value;
+  let list = playlists[listName];
+  let randomId = list[Math.floor(Math.random() * list.length)];
+
+  player.loadVideoById(randomId);
+}
+</script>
+</body>
+</html>
